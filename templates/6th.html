@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EcoLearn • Leaderboard</title>
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background: #f9fafb;
+      color: #111827;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      font-weight: 700;
+      color: #111827;
+    }
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    /* ========== NAVBAR ========== */
+    .navbar {
+      background: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-weight: 800;
+      font-size: 1.3rem;
+      background: linear-gradient(90deg,#16a34a,#22c55e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #374151;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .nav-links a:hover {
+      color: #16a34a;
+    }
+    .nav-links a.active {
+      color: #22c55e;
+      font-weight: 600;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: .5rem 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+      border: none;
+    }
+    .btn-primary {
+      background: #22c55e;
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: #16a34a;
+    }
+    .btn-ghost {
+      background: transparent;
+      color: #374151;
+    }
+    .btn-ghost:hover {
+      background: #f3f4f6;
+    }
+    .btn-success {
+      background: #16a34a;
+      color: #fff;
+    }
+    .btn-success:hover {
+      background: #15803d;
+    }
+
+    /* ========== LAYOUT ========== */
+    .container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .page-header {
+      grid-column: 1 / -1;
+      margin-bottom: 1.5rem;
+    }
+    .page-header h1 {
+      font-size: 2rem;
+    }
+    .muted {
+      color: #6b7280;
+      margin-top: .3rem;
+    }
+
+    /* ========== STATS ========== */
+    .stats-grid {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: #fff;
+      padding: 1.2rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: transform .2s ease;
+    }
+    .stat-card:hover {
+      transform: translateY(-3px);
+    }
+    .stat-card.highlight {
+      background: #dcfce7;
+    }
+    .stat-value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: .3rem;
+    }
+    .stat-label {
+      font-size: .9rem;
+      color: #6b7280;
+    }
+
+    /* ========== LEADERBOARD ========== */
+    .leaderboard {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .leaderboard h2 {
+      margin-bottom: 1rem;
+    }
+    .ranking-list {
+      list-style: none;
+    }
+    .rank-item {
+      padding: .8rem 1rem;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      transition: background .2s ease;
+    }
+    .rank-item:last-child {
+      border-bottom: none;
+    }
+    .rank-item:hover {
+      background: #f9fafb;
+    }
+    .rank-item.gold { color: #eab308; }
+    .rank-item.silver { color: #9ca3af; }
+    .rank-item.bronze { color: #b45309; }
+    .rank-item.you {
+      background: #dcfce7;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    /* ========== SIDEBAR ========== */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .card {
+      background: #fff;
+      padding: 1.2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .card h3 {
+      margin-bottom: .5rem;
+    }
+    .rank-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #22c55e;
+      margin: .5rem 0;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="brand">🐼 EcoLearn</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Lessons</a></li>
+      <li><a href="#">Quizzes</a></li>
+      <li><a href="#">Eco Tasks</a></li>
+      <li><a href="#">Progress</a></li>
+      <li><a href="#" class="active">Leaderboard</a></li>
+    </ul>
+    <div>
+      <button class="btn btn-ghost">Login</button>
+      <button class="btn btn-primary">Sign Up</button>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="container">
+    <!-- HEADER -->
+    <header class="page-header">
+      <h1>EcoLearn Leaderboard</h1>
+      <p class="muted">See how you rank among fellow eco-warriors! Compete with individuals and schools to make the biggest impact 🌍</p>
+    </header>
+
+    <!-- STATS -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">1,247</div>
+        <div class="stat-label">Active Users</div>
+      </div>
+      <div class="stat-card highlight">
+        <div class="stat-value">25</div>
+        <div class="stat-label">Schools Competing</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">156k</div>
+        <div class="stat-label">Points This Week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">3</div>
+        <div class="stat-label">Days Left</div>
+      </div>
+    </section>
+
+    <!-- LEADERBOARD -->
+    <section class="leaderboard">
+      <h2>Top Rankings</h2>
+      <ul class="ranking-list">
+        <li class="rank-item gold"><span>🥇 Alex Chen</span> <span>2,450 pts</span></li>
+        <li class="rank-item silver"><span>🥈 Maya Patel</span> <span>2,380 pts</span></li>
+        <li class="rank-item bronze"><span>🥉 Jordan Kim</span> <span>2,250 pts</span></li>
+        <li class="rank-item"><span>Sam Wilson</span> <span>2,100 pts</span></li>
+        <li class="rank-item"><span>Riley Taylor</span> <span>1,950 pts</span></li>
+        <li class="rank-item you"><span>⭐ You</span> <span>1,250 pts</span></li>
+      </ul>
+    </section>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="card">
+        <h3>Your Current Rank</h3>
+        <p class="rank-number">#6</p>
+        <p>Out of 1,247 participants</p>
+        <button class="btn btn-primary">View My Progress</button>
+      </div>
+
+      <div class="card">
+        <h3>Weekly Challenge</h3>
+        <p><strong>Plastic-Free Week</strong><br>Reduce plastic usage in daily life</p>
+        <p>Participants: 1,247</p>
+        <p>Time Left: 3 days</p>
+        <button class="btn btn-success">Join Challenge</button>
+      </div>
+
+      <div class="card">
+        <h3>Achievement Spotlight 🌟</h3>
+        <p><strong>Community Impact Champion</strong><br>
+          Awarded to Maya Patel for organizing 5 cleanup events.</p>
+        <button class="btn btn-ghost">View All Achievements</button>
+      </div>
+    </aside>
+  </main>
+</body>
+</html>
