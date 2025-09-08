@@ -1,192 +1,388 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ECOLEARN</title>
-<style>
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    background-color: rgb(80, 70, 210);
-    font-family: Arial, sans-serif;
-    position: relative; 
-}
-
-.header {
-    background: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-}
-
-.header-logo {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.header-logo img {
-    width: 60px;
-    height: 60px;
-}
-
-.header-logo span {
-    font-size: 40px;
-    font-weight: 900;
-}
-
-.header-buttons {
-    display: flex;
-    gap: 10px;
-}
-
-.header-buttons button {
-    background: red;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 10px;
-    font-size: 15px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.header-buttons button:hover {
-    background-color: darkred;
-}
-
-.main-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 40px 20px;
-}
-
-.knowledge-box {
-    background: rgb(128, 0, 0);
-    color: red;
-    font-size: 45px;
-    font-weight: 700;
-    padding: 40px;
-    width: 40%;
-    border-radius: 20px 0 0 20px;
-    clip-path: polygon(0 0, 100% 0, 85% 50%, 100% 100%, 0 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.knowledge-box div {
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-.middle-text {
-    width: 45%;
-    color: black;
-    font-size: 30px;
-    font-weight: 700;
-    line-height: 2;
-    text-align: left;
-}
-
-.right-image {
-    width: 15%;
-    text-align: right;
-}
-
-.right-image img {
-    width: 200px;
-    height: 320px;
-    object-fit: contain;
-}
-
-.footer-text {
-    color: white;
-    font-size: 30px;
-    text-align: center;
-    margin: 30px 20px;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-}
-
-@media (max-width: 900px) {
-    .main-content {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-        margin: 20px;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoLearn - Lessons</title>
+  <style>
+    /* -------- Base Styles -------- */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f8fb;
+      color: #333;
+      line-height: 1.6;
     }
-    .knowledge-box,
-    .middle-text,
-    .right-image {
-        width: 100%;
-        border-radius: 20px;
-        clip-path: none;
-        text-align: center;
-    }
-    .middle-text {
-        font-size: 24px;
-        line-height: 1.5;
-    }
-    .right-image img {
-        width: 150px;
-        height: auto;
-    }
-    .footer-text {
-        font-size: 24px;
-        position: static;
-        margin: 20px 10px;
-    }
-}
+    h1, h2, h3, h4 { margin: 0; }
 
-</style>
+    /* -------- Navbar -------- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 50px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-weight: bold;
+      font-size: 24px;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .navbar ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color .3s;
+    }
+    .navbar ul li a:hover {
+      color: #2575fc;
+    }
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    .btn-login {
+      border: 1px solid #2575fc;
+      color: #2575fc;
+      background: #fff;
+    }
+    .btn-login:hover {
+      background: #f2f6ff;
+    }
+    .btn-signup {
+      background: #2575fc;
+      color: #fff;
+      border: none;
+    }
+    .btn-signup:hover {
+      background: #1257c0;
+    }
+
+    /* -------- Header -------- */
+    .header {
+      text-align: center;
+      padding: 50px 20px 30px;
+    }
+    .header h1 {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+    .header p {
+      max-width: 700px;
+      margin: auto;
+      color: #555;
+      font-size: 16px;
+    }
+
+    /* -------- Progress Section -------- */
+    .progress-section {
+      background: #fff;
+      margin: 20px auto;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 1000px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .progress-title {
+      font-weight: bold;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+    .progress-bars {
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+    .progress {
+      flex: 1;
+      text-align: center;
+      min-width: 200px;
+    }
+    .progress h4 {
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    .progress-bar {
+      height: 10px;
+      background: #eaeaea;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 5px;
+    }
+
+    /* -------- Lessons Section -------- */
+    .lesson-section {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    .lesson-category {
+      margin-bottom: 40px;
+    }
+    .lesson-category h2 {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+    .lesson-category p {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .lessons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 20px;
+    }
+    .lesson-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+      transition: transform .2s;
+    }
+    .lesson-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    .lesson-card h3 {
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+    .lesson-info {
+      font-size: 13px;
+      margin-bottom: 15px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .tag {
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: bold;
+      color: #fff;
+    }
+    .beginner { background: #4caf50; }
+    .intermediate { background: #ff9800; }
+    .advanced { background: #d32f2f; }
+    .completed { background: #2196f3; }
+    .btn-action {
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+    .btn-review {
+      background: #4caf50;
+      color: #fff;
+    }
+    .btn-review:hover {
+      background: #3d8f42;
+    }
+    .btn-start {
+      background: #2575fc;
+      color: #fff;
+    }
+    .btn-start:hover {
+      background: #1257c0;
+    }
+
+    /* -------- CTA -------- */
+    .cta {
+      background: linear-gradient(to right, #00c853, #00e676);
+      text-align: center;
+      padding: 50px 20px;
+      color: white;
+      margin-top: 40px;
+    }
+    .cta h3 {
+      margin-bottom: 15px;
+      font-size: 22px;
+    }
+    .cta p {
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+    .cta button {
+      background: white;
+      color: #00c853;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .cta button:hover {
+      background: #f1f1f1;
+    }
+  </style>
 </head>
-<body style="margin:0;padding:0;background-color:rgb(80,70,210);">
+<body>
 
-<div style="background:white;display:flex;justify-content:space-between;align-items:center;padding:10px;">
-    <div style="display:flex;gap:10px;">
-        <img src="images/panda.png" style="width:60px;height:60px;">
-        <span style="font-size:40px;font-weight:900;">ECOLEARN</span>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">EcoLearn</div>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Lessons</a></li>
+      <li><a href="#">Quizzes</a></li>
+      <li><a href="#">Eco Tasks</a></li>
+      <li><a href="#">Progress</a></li>
+      <li><a href="#">Leaderboard</a></li>
+    </ul>
+    <div>
+      <button class="btn btn-login">Login</button>
+      <button class="btn btn-signup">Sign Up</button>
     </div>
-    <div style="display:flex;gap:10px;">
-        <button style="background:red;color:white;padding:8px;border-radius:10px;font-size:15px;">LOGIN</button>
-        <button style="background:red;color:white;padding:8px;border-radius:10x;font-size:15px;">SIGN UP</button>
-    </div>
-</div>
+  </div>
 
-<div style="display:flex;justify-content:space-between;align-items:center;margin:40px 20px;">
-    <div style="background:rgb(128,0,0);color:red;font-size:45px;font-weight:700;padding:40px;width:40%;border-radius:20px 0px 0px 20px;clip-path:polygon(0 0,100% 0,85% 50%,100% 100%,0 100%);">
-        <div style="text-align:left;">
-            <div style="margin-bottom:20px;">KNOWLEDGE</div>
-            <div style="margin-bottom:20px;">+</div>
-            <div>ACTION</div>
+  <!-- Header -->
+  <div class="header">
+    <h1>Interactive Environmental Lessons</h1>
+    <p>Explore comprehensive lessons on environmental science, sustainability, and climate action. Learn through engaging multimedia content and interactive activities.</p>
+  </div>
+
+  <!-- Progress Section -->
+  <div class="progress-section">
+    <div class="progress-title">Your Learning Progress</div>
+    <div class="progress-bars">
+      <div class="progress">
+        <h4>🌱 Ecosystem Well-being</h4>
+        <div class="progress-bar"><div class="progress-fill" style="width:50%; background:#4caf50"></div></div>
+        <p>50% Complete</p>
+      </div>
+      <div class="progress">
+        <h4>♻ Sustainable Living</h4>
+        <div class="progress-bar"><div class="progress-fill" style="width:25%; background:#ff9800"></div></div>
+        <p>25% Complete</p>
+      </div>
+      <div class="progress">
+        <h4>🌍 Climate Responsibility</h4>
+        <div class="progress-bar"><div class="progress-fill" style="width:0%; background:#d32f2f"></div></div>
+        <p>0% Complete</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lesson Sections -->
+  <div class="lesson-section">
+
+    <!-- Ecosystem Well-being -->
+    <div class="lesson-category">
+      <h2>🌱 Ecosystem Well-being</h2>
+      <p>Learn about biodiversity, habitat conservation, and ecological balance</p>
+      <div class="lessons-grid">
+        <div class="lesson-card">
+          <h3>Understanding Biodiversity</h3>
+          <div class="lesson-info"><span class="tag beginner">Beginner</span><span>15 min</span><span class="tag completed">Completed</span></div>
+          <button class="btn-action btn-review">Review</button>
         </div>
+        <div class="lesson-card">
+          <h3>Forest Ecosystems</h3>
+          <div class="lesson-info"><span class="tag intermediate">Intermediate</span><span>20 min</span><span class="tag completed">Completed</span></div>
+          <button class="btn-action btn-review">Review</button>
+        </div>
+        <div class="lesson-card">
+          <h3>Marine Life Protection</h3>
+          <div class="lesson-info"><span class="tag intermediate">Intermediate</span><span>18 min</span></div>
+          <button class="btn-action btn-start">Start Lesson</button>
+        </div>
+        <div class="lesson-card">
+          <h3>Pollinator Conservation</h3>
+          <div class="lesson-info"><span class="tag beginner">Beginner</span><span>12 min</span></div>
+          <button class="btn-action btn-start">Start Lesson</button>
+        </div>
+      </div>
     </div>
-    <div style="width:45%;color:black;font-size:30px;font-weight:700;line-height:2.0;text-align:left;">
-        START LEARNING.<br>
-        JOIN CHALLENGES.<br>
-        PLAY AND LEARN.
-    </div>
-    <div style="width:15%;text-align:right;">
-        <img src="images/panda.png" style="width:200px;height:320px;">
-    </div>
-</div>
 
-<div style="color:white;font-size:30px;text-align:center;margin:30px;position: absolute;">
-    Explore key areas like Ecosystem Well-being, Sustainable Living, and Climate Responsibility<br>
-    All through fun challenges and quizzes.
-</div>
+    <!-- Sustainable Living -->
+    <div class="lesson-category">
+      <h2>♻ Sustainable Living</h2>
+      <p>Discover eco-friendly practices for daily life and consumption habits</p>
+      <div class="lessons-grid">
+        <div class="lesson-card">
+          <h3>Reduce, Reuse, Recycle</h3>
+          <div class="lesson-info"><span class="tag beginner">Beginner</span><span>16 min</span><span class="tag completed">Completed</span></div>
+          <button class="btn-action btn-review">Review</button>
+        </div>
+        <div class="lesson-card">
+          <h3>Sustainable Transportation</h3>
+          <div class="lesson-info"><span class="tag beginner">Beginner</span><span>14 min</span></div>
+          <button class="btn-action btn-start">Start Lesson</button>
+        </div>
+        <div class="lesson-card">
+          <h3>Green Energy at Home</h3>
+          <div class="lesson-info"><span class="tag advanced">Advanced</span><span>22 min</span></div>
+          <button class="btn-action btn-start">Start Lesson</button>
+        </div>
+        <div class="lesson-card">
+          <h3>Ethical Consumption</h3>
+          <div class="lesson-info"><span class="tag intermediate">Intermediate</span><span>19 min</span></div>
+          <button class="btn-action btn-start">Start Lesson</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Climate Responsibility -->
+    <div class="lesson-category">
+      <h2>🌍 Climate Responsibility</h2>
+      <p>Understand climate change impacts and solutions for a sustainable future</p>
+      <div class="lessons-grid">
+        <div class="lesson-card">
+          <h3>Climate Change Basics</h3>
+          <div class="lesson-info"><span class="tag beginner">Beginner</span><span>25 min</span></div>
+          <button class="btn-action btn-start">Start Lesson</button>
+        </div>
+        <div class="lesson-card">
+          <h3>Carbon Footprint Awareness</h3>
+          <div class="lesson-info"><span class="tag intermediate">Intermediate</span><span>17 min</span></div>
+          <button class="btn-action btn-start">Start Lesson</button>
+        </div>
+        <div class="lesson-card">
+          <h3>Renewable Energy Sources</h3>
+          <div class="lesson-info"><span class="tag intermediate">Intermediate</span><span>21 min</span></div>
+          <button class="btn-action btn-start">Start Lesson</button>
+        </div>
+        <div class="lesson-card">
+          <h3>Climate Action Planning</h3>
+          <div class="lesson-info"><span class="tag advanced">Advanced</span><span>24 min</span></div>
+          <button class="btn-action btn-start">Start Lesson</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <h3>Keep Learning to Unlock More!</h3>
+    <p>Complete lessons to earn eco-points, unlock new challenges, and make a real difference!</p>
+    <button>View My Achievements</button>
+  </div>
 
 </body>
 </html>
