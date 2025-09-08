@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EcoLearn - Quizzes</title>
   <style>
+    /* ===== Base Styles ===== */
     body {
       margin: 0;
       font-family: 'Segoe UI', Arial, sans-serif;
       background: #f4f8fb;
       color: #333;
+      line-height: 1.6;
     }
+    h1, h2, h3, h4 { margin: 0; }
 
+    /* ===== Navbar ===== */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 4px 50px;
+      padding: 14px 50px;
       background: #fff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       position: sticky;
       top: 0;
       z-index: 100;
     }
-
     .logo {
       font-weight: bold;
       font-size: 24px;
@@ -32,7 +34,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
     .navbar ul {
       display: flex;
       list-style: none;
@@ -40,74 +41,59 @@
       margin: 0;
       padding: 0;
     }
-
     .navbar ul li a {
       text-decoration: none;
       color: #333;
       font-weight: 500;
       transition: color .3s;
     }
-
-    .navbar ul li a:hover {
-      color: #2575fc;
-    }
-
+    .navbar ul li a:hover { color: #2575fc; }
     .btn {
       padding: 8px 16px;
       border-radius: 6px;
       font-weight: 600;
       cursor: pointer;
-      transition: 0.3s;
+      transition: 0.3s ease;
     }
-
     .btn-login {
       border: 1px solid #2575fc;
       background: #fff;
       color: #2575fc;
     }
-
-    .btn-login:hover {
-      background: #f2f6ff;
-    }
-
+    .btn-login:hover { background: #f2f6ff; }
     .btn-signup {
       background: #2575fc;
       color: #fff;
       border: none;
     }
+    .btn-signup:hover { background: #1257c0; }
 
-    .btn-signup:hover {
-      background: #1257c0;
-    }
-
-    /* Header */
+    /* ===== Header ===== */
     .header {
       text-align: center;
       padding: 50px 20px 30px;
     }
-
     .header h1 {
-      font-size: 28px;
+      font-size: 30px;
       margin-bottom: 12px;
+      color: #222;
     }
-
     .header p {
       color: #555;
-      font-size: 15px;
-      max-width: 650px;
+      font-size: 16px;
+      max-width: 700px;
       margin: auto;
     }
 
-    /* Stats Cards */
+    /* ===== Stats Section ===== */
     .stats {
       display: flex;
       gap: 20px;
       justify-content: center;
-      margin: 30px auto;
+      margin: 40px auto;
       max-width: 1000px;
       flex-wrap: wrap;
     }
-
     .stat-card {
       flex: 1;
       min-width: 250px;
@@ -115,83 +101,71 @@
       padding: 25px;
       text-align: center;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform .2s;
     }
-
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    }
     .stat-card h2 {
-      font-size: 26px;
+      font-size: 28px;
       margin: 8px 0;
+      color: #2575fc;
     }
-
     .stat-card p {
       font-size: 14px;
       color: #666;
     }
+    .stat-completed { background: #e8f4ff; }
+    .stat-score { background: #e8f7ef; }
+    .stat-points { background: #fff3f3; }
 
-    .stat-completed {
-      background: #fff7f0;
-    }
-
-    .stat-score {
-      background: #e8f7ef;
-    }
-
-    .stat-points {
-      background: #fff3f3;
-    }
-
-    /* Quiz Section */
+    /* ===== Quiz Section ===== */
     .quiz-section {
       max-width: 1100px;
-      margin: 30px auto;
+      margin: 30px auto 60px;
       padding: 0 20px;
     }
-
     .quiz-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
+      gap: 25px;
     }
-
     .quiz-card {
       background: #fff;
       border-radius: 12px;
       padding: 20px;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-      transition: transform .2s;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+      transition: transform .2s, box-shadow .2s;
     }
-
     .quiz-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
-
     .quiz-card h3 {
-      font-size: 16px;
+      font-size: 18px;
       margin-bottom: 5px;
+      color: #222;
     }
-
     .quiz-category {
       font-size: 13px;
       color: #2575fc;
       font-weight: 600;
       margin-bottom: 8px;
     }
-
     .quiz-desc {
-      font-size: 13px;
+      font-size: 14px;
       color: #555;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
     }
-
     .quiz-info {
       font-size: 12px;
       display: flex;
       gap: 10px;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
       flex-wrap: wrap;
     }
-
     .tag {
       padding: 3px 8px;
       border-radius: 6px;
@@ -199,69 +173,43 @@
       font-weight: bold;
       color: #fff;
     }
-
-    .beginner {
-      background: #4caf50;
-    }
-
-    .intermediate {
-      background: #ff9800;
-    }
-
-    .advanced {
-      background: #d32f2f;
-    }
-
+    .beginner { background: #4caf50; }
+    .intermediate { background: #ff9800; }
+    .advanced { background: #d32f2f; }
     .quiz-progress {
       font-size: 12px;
       color: #4caf50;
       font-weight: bold;
     }
-
     .btn-quiz {
       display: inline-block;
-      padding: 8px 14px;
+      padding: 10px 14px;
       border-radius: 6px;
       border: none;
       cursor: pointer;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
       transition: 0.3s;
       width: 100%;
     }
-
-    .btn-start {
-      background: #2575fc;
-      color: #fff;
-    }
-
-    .btn-start:hover {
-      background: #1257c0;
-    }
-
-    .btn-retake {
-      background: #4caf50;
-      color: #fff;
-    }
-
-    .btn-retake:hover {
-      background: #3d8f42;
-    }
+    .btn-start { background: #2575fc; color: #fff; }
+    .btn-start:hover { background: #1257c0; }
+    .btn-retake { background: #4caf50; color: #fff; }
+    .btn-retake:hover { background: #3d8f42; }
   </style>
 </head>
-
 <body>
 
   <!-- Navbar -->
   <div class="navbar">
     <div class="logo">EcoLearn</div>
     <ul>
-      <li><a href="home">Home</a></li>
-      <li><a href="lessons">Lessons</a></li>
-      <li><a href="quizzes">Quizzes</a></li>
-      <li><a href="ecotasks">Eco Tasks</a></li>
-      <li><a href="progress">Progress</a></li>
-      <li><a href="leaderboards">Leaderboard</a></li>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Lessons</a></li>
+      <li><a href="#">Quizzes</a></li>
+      <li><a href="#">Eco Tasks</a></li>
+      <li><a href="#">Progress</a></li>
+      <li><a href="#">Leaderboard</a></li>
     </ul>
     <div>
       <button class="btn btn-login">Login</button>
@@ -272,8 +220,7 @@
   <!-- Header -->
   <div class="header">
     <h1>Environmental Knowledge Quizzes</h1>
-    <p>Test your environmental knowledge with interactive quizzes. Get immediate feedback and earn eco-points as you
-      learn!</p>
+    <p>Test your environmental knowledge with interactive quizzes. Get immediate feedback and earn eco-points as you learn!</p>
   </div>
 
   <!-- Stats -->
@@ -356,5 +303,4 @@
   </div>
 
 </body>
-
 </html>
