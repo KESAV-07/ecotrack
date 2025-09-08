@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoLearn - Progress</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #f8f9fb;
+      color: #333;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #444;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav ul li a.active,
+    nav ul li a:hover {
+      color: #2575fc;
+    }
+
+    nav .auth-buttons button {
+      margin-left: 10px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .login { background: white; border: 1px solid #2575fc; color: #2575fc; }
+    .signup { background: #2575fc; color: white; }
+
+    /* Container */
+    .container {
+      width: 90%;
+      margin: 30px auto;
+    }
+
+    /* Profile Header */
+    .profile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      margin-bottom: 25px;
+    }
+
+    .profile-info h2 {
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    .profile-info p {
+      color: #777;
+      font-size: 14px;
+    }
+
+    .eco-points {
+      text-align: center;
+    }
+
+    .eco-points h1 {
+      color: #28a745;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 5px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+    }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .stat-card h2 {
+      margin-top: 10px;
+      font-size: 22px;
+      color: #2575fc;
+    }
+
+    /* Learning Progress */
+    .section {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .section h3 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .progress-item {
+      margin-bottom: 12px;
+    }
+
+    .progress-item span {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .progress-item .progress-bar {
+      margin-top: 6px;
+    }
+
+    /* Activity */
+    .activity {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    .recent-activity ul {
+      list-style: none;
+    }
+
+    .recent-activity li {
+      background: #f1f9f1;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+
+    .recent-activity span {
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    /* Badges */
+    .badges {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .badge-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .badge {
+      background: #f9f9f9;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    /* Weekly Challenge */
+    .weekly-challenge {
+      margin-top: 25px;
+      padding: 20px;
+      background: #fff5e6;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .weekly-challenge button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">ECOLEARN</div>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Lessons</a></li>
+      <li><a href="#">Quizzes</a></li>
+      <li><a href="#">Eco Tasks</a></li>
+      <li><a href="#" class="active">Progress</a></li>
+      <li><a href="#">Leaderboard</a></li>
+    </ul>
+    <div class="auth-buttons">
+      <button class="login">Login</button>
+      <button class="signup">Sign Up</button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <div class="profile-info">
+        <h2>Eco Warrior</h2>
+        <p>Level 5 • Joined January 2024</p>
+      </div>
+      <div class="eco-points">
+        <h1>1250</h1>
+        <p>Total Eco Points</p>
+        <div class="progress-bar"><span style="width:100%"></span></div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat-card"><p>Tasks Done</p><h2>8</h2></div>
+      <div class="stat-card"><p>Lessons</p><h2>15</h2></div>
+      <div class="stat-card"><p>Quizzes</p><h2>6</h2></div>
+      <div class="stat-card"><p>Day Streak</p><h2>12 🔥</h2></div>
+    </div>
+
+    <!-- Learning Progress -->
+    <div class="section">
+      <h3>Learning Progress</h3>
+      <div class="progress-item">
+        <span><b>Ecosystem Well-being</b> 8/12 lessons</span>
+        <div class="progress-bar"><span style="width:70%"></span></div>
+      </div>
+      <div class="progress-item">
+        <span><b>Sustainable Living</b> 5/8 lessons</span>
+        <div class="progress-bar"><span style="width:60%"></span></div>
+      </div>
+      <div class="progress-item">
+        <span><b>Climate Responsibility</b> 2/6 lessons</span>
+        <div class="progress-bar"><span style="width:30%"></span></div>
+      </div>
+    </div>
+
+    <!-- Activity & Badges -->
+    <div class="activity">
+      <div class="recent-activity section">
+        <h3>Recent Activity</h3>
+        <ul>
+          <li>Marine Life Protection <span>+25 pts</span></li>
+          <li>Community Cleanup <span>+150 pts</span></li>
+          <li>Biodiversity Basics <span>+40 pts</span></li>
+          <li>Sustainable Transportation <span>+30 pts</span></li>
+        </ul>
+      </div>
+      <div class="badges">
+        <h3>Badges & Achievements</h3>
+        <div class="badge-grid">
+          <div class="badge">🌱 First Steps</div>
+          <div class="badge">📖 Knowledge Seeker</div>
+          <div class="badge">🎯 Quiz Master</div>
+          <div class="badge">🤝 Community Hero</div>
+          <div class="badge">🔥 Consistency Champion</div>
+          <div class="badge">💧 Water Guardian</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weekly Challenge -->
+    <div class="weekly-challenge">
+      <h3>Weekly Challenge</h3>
+      <p><b>Plastic-Free Week</b><br>Avoid single-use plastics for 7 days</p>
+      <div class="progress-bar"><span style="width:45%"></span></div>
+      <button>Log Today’s Progress</button>
+    </div>
+  </div>
+</body>
+</html>
