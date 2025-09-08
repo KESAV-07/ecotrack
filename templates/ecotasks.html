@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoLearn - Eco Tasks</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 50px;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .navbar .btn {
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      border: none;
+      font-weight: 600;
+    }
+
+    .btn-login {
+      border: 1px solid #2575fc;
+      color: #2575fc;
+      background: #fff;
+    }
+
+    .btn-signup {
+      background: #1e8e3e;
+      color: #fff;
+    }
+
+    /* Page Header */
+    .page-header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    .page-header h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .page-header p {
+      color: #555;
+    }
+
+    /* Stats Section */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+      flex-wrap: wrap;
+    }
+
+    .stat-card {
+      background: #fff;
+      flex: 1 1 200px;
+      max-width: 220px;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      font-weight: 600;
+    }
+
+    .stat-card.green {
+      color: #fff;
+      background: #43a047;
+    }
+
+    .stat-card.beige {
+      background: #f3e5ab;
+    }
+
+    .stat-card.pink {
+      background: #f8bbd0;
+    }
+
+    .stat-card.gray {
+      background: #e0e0e0;
+    }
+
+    .stat-card h2 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    /* Task Cards */
+    .tasks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 30px 50px;
+    }
+
+    .task-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .task-card h3 {
+      margin: 10px 0;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .task-meta {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .badges {
+      display: flex;
+      gap: 10px;
+      margin: 10px 0;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .beginner {
+      background: #d4edda;
+      color: #1b5e20;
+    }
+
+    .intermediate {
+      background: #fff3cd;
+      color: #795548;
+    }
+
+    .advanced {
+      background: #f8d7da;
+      color: #c62828;
+    }
+
+    .points {
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+
+    .btn-task {
+      background: #2575fc;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: auto;
+      transition: 0.3s;
+    }
+
+    .btn-task:hover {
+      background: #1257b5;
+    }
+
+    .btn-review {
+      background: #43a047;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* CTA */
+    .cta {
+      background: #43a047;
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px;
+      margin-top: 30px;
+    }
+
+    .cta h2 {
+      margin-bottom: 15px;
+      font-size: 24px;
+    }
+
+    .cta button {
+      background: #fff;
+      color: #43a047;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .cta button:hover {
+      background: #f1f1f1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">EcoLearn</div>
+    <ul>
+      <li><a href="home">Home</a></li>
+      <li><a href="lessons">Lessons</a></li>
+      <li><a href="quizzes">Quizzes</a></li>
+      <li><a href="ecotasks">Eco Tasks</a></li>
+      <li><a href="progress">Progress</a></li>
+      <li><a href="leaderboards">Leaderboard</a></li>
+    </ul>
+    <div>
+      <button class="btn btn-login">Login</button>
+      <button class="btn btn-signup">Sign Up</button>
+    </div>
+  </div>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1>Real-World Eco Actions</h1>
+    <p>Complete environmental challenges and make a real impact! Earn eco-points by taking action for sustainability in
+      your community and daily life.</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-card beige">
+      <h2>1</h2> Tasks Completed
+    </div>
+    <div class="stat-card green">
+      <h2>150</h2> Eco Points Earned
+    </div>
+    <div class="stat-card pink">
+      <h2>5</h2> Active Tasks
+    </div>
+    <div class="stat-card gray">
+      <h2>12</h2> Days Active
+    </div>
+  </div>
+
+  <!-- Tasks Grid -->
+  <div class="tasks">
+    <div class="task-card">
+      <h3>Plant a Tree or Start a Garden</h3>
+      <p class="task-meta">Ecosystem Well-being</p>
+      <p>Plant a tree in your community or start a small garden at home. Document the process and share your commitment
+        to green spaces.</p>
+      <div class="badges">
+        <span class="badge intermediate">1–2 hrs</span>
+        <span class="badge points">+100 Points</span>
+      </div>
+      <button class="btn-task">Start Task</button>
+    </div>
+
+    <div class="task-card">
+      <h3>Organize a Community Cleanup</h3>
+      <p class="task-meta">Environmental Action</p>
+      <p>Organize or participate in a local cleanup drive. Help remove litter from parks, beaches, or neighborhoods.</p>
+      <div class="badges">
+        <span class="badge advanced">Hard</span>
+        <span class="badge points">+120 Points</span>
+      </div>
+      <button class="btn-review">Review Submission</button>
+    </div>
+
+    <div class="task-card">
+      <h3>Reduce Water Usage for a Week</h3>
+      <p class="task-meta">Sustainable Living</p>
+      <p>Track and reduce your daily water consumption. Take shorter showers, fix leaks, and use water-saving
+        techniques.</p>
+      <div class="badges">
+        <span class="badge beginner">1 Week</span>
+        <span class="badge points">+75 Points</span>
+      </div>
+      <button class="btn-task">Start Task</button>
+    </div>
+
+    <div class="task-card">
+      <h3>Use Public Transport Week</h3>
+      <p class="task-meta">Climate Action</p>
+      <p>Commit to using public transport, cycling, or walking instead of private vehicles for one week.</p>
+      <div class="badges">
+        <span class="badge beginner">Easy</span>
+        <span class="badge points">+80 Points</span>
+      </div>
+      <button class="btn-task">Start Task</button>
+    </div>
+
+    <div class="task-card">
+      <h3>Energy Conservation Challenge</h3>
+      <p class="task-meta">Sustainable Living</p>
+      <p>Reduce household energy consumption by implementing energy-saving practices and tracking usage.</p>
+      <div class="badges">
+        <span class="badge intermediate">1 Week</span>
+        <span class="badge points">+90 Points</span>
+      </div>
+      <button class="btn-task">Start Task</button>
+    </div>
+
+    <div class="task-card">
+      <h3>Zero Waste Day Challenge</h3>
+      <p class="task-meta">Sustainable Living</p>
+      <p>Spend one day producing zero waste. Plan meals, use reusable containers, and avoid single-use items.</p>
+      <div class="badges">
+        <span class="badge intermediate">1 Day</span>
+        <span class="badge points">+60 Points</span>
+      </div>
+      <button class="btn-task">Start Task</button>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <h2>Make a Real Difference!</h2>
+    <p>Every eco-action you complete contributes to a healthier planet. Start with simple tasks and work your way up to
+      become an environmental champion!</p>
+    <button>View All Achievements</button>
+  </div>
+
+</body>
+
+</html>
