@@ -1,356 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoLearn - Progress</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EcoLearn • Leaderboard</title>
   <style>
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    }
-
     body {
-      background: #f8f9fb;
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background: #f4f8fb;
       color: #333;
     }
 
-    /* Navbar */
-    nav {
+    /* NAVBAR */
+    .navbar {
+      background: #fff;
+      padding: 12px 50px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 4px 50px;
-      background: #fff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
-
     .logo {
-      font-size: 22px;
       font-weight: bold;
+      font-size: 22px;
       background: linear-gradient(to right, #6a11cb, #2575fc);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
-    nav ul {
+    .navbar ul {
+      display: flex;
       list-style: none;
-      display: flex;
-      gap: 20px;
+      gap: 25px;
     }
-
-    nav ul li a {
+    .navbar ul li a {
       text-decoration: none;
-      color: #444;
+      color: #333;
       font-weight: 500;
       transition: 0.3s;
     }
-
-    nav ul li a.active,
-    nav ul li a:hover {
+    .navbar ul li a.active,
+    .navbar ul li a:hover {
       color: #2575fc;
     }
 
-    nav .auth-buttons button {
-      margin-left: 10px;
-      padding: 6px 14px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      font-weight: 500;
-      transition: 0.3s;
-    }
-
-    .login {
-      background: white;
-      border: 1px solid #2575fc;
-      color: #2575fc;
-    }
-
-    .signup {
-      background: #2575fc;
-      color: white;
-    }
-
-    /* Container */
+    /* LAYOUT */
     .container {
-      width: 90%;
-      margin: 30px auto;
-    }
-
-    /* Profile Header */
-    .profile-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-      margin-bottom: 25px;
-    }
-
-    .profile-info h2 {
-      margin-bottom: 6px;
-      color: #333;
-    }
-
-    .profile-info p {
-      color: #777;
-      font-size: 14px;
-    }
-
-    .eco-points {
-      text-align: center;
-    }
-
-    .eco-points h1 {
-      color: #28a745;
-    }
-
-    .progress-bar {
-      height: 8px;
-      background: #e0e0e0;
-      border-radius: 5px;
-      margin-top: 10px;
-      overflow: hidden;
-    }
-
-    .progress-bar span {
-      display: block;
-      height: 100%;
-      background: linear-gradient(90deg, #6a11cb, #2575fc);
-    }
-
-    /* Stats */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      margin-bottom: 25px;
-    }
-
-    .stat-card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    }
-
-    .stat-card h2 {
-      margin-top: 10px;
-      font-size: 22px;
-      color: #2575fc;
-    }
-
-    /* Learning Progress */
-    .section {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 25px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    }
-
-    .section h3 {
-      margin-bottom: 15px;
-      color: #333;
-    }
-
-    .progress-item {
-      margin-bottom: 12px;
-    }
-
-    .progress-item span {
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-      color: #555;
-    }
-
-    .progress-item .progress-bar {
-      margin-top: 6px;
-    }
-
-    /* Activity */
-    .activity {
       display: grid;
       grid-template-columns: 2fr 1fr;
-      gap: 20px;
+      gap: 25px;
+      padding: 30px;
+      max-width: 1200px;
+      margin: auto;
     }
 
-    .recent-activity ul {
+    /* LEFT: Leaderboard */
+    .leaderboard {
+      background: #fff;
+      padding: 22px;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    }
+    .leaderboard h2 {
+      margin-bottom: 18px;
+      color: #2c3e50;
+    }
+    .leaderboard ul {
       list-style: none;
+      padding: 0;
     }
-
-    .recent-activity li {
-      background: #f1f9f1;
-      padding: 12px;
-      border-radius: 8px;
-      margin-bottom: 10px;
+    .leaderboard li {
       display: flex;
       justify-content: space-between;
-      font-size: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+      font-weight: 500;
+      color: #34495e;
     }
-
-    .recent-activity span {
-      color: #28a745;
-      font-weight: bold;
-    }
-
-    /* Badges */
-    .badges {
-      background: white;
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    }
-
-    .badge-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .badge {
-      background: #f9f9f9;
+    .leaderboard li.gold { color: #eab308; }
+    .leaderboard li.silver { color: #6b7280; }
+    .leaderboard li.bronze { color: #b45309; }
+    .leaderboard li.you {
+      background: #eaf1ff;
+      border-radius: 6px;
       padding: 12px;
-      border-radius: 8px;
-      text-align: center;
-      font-size: 13px;
+      font-weight: bold;
+      color: #2575fc;
     }
 
-    /* Weekly Challenge */
-    .weekly-challenge {
-      margin-top: 25px;
+    /* RIGHT: Sidebar */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .card {
+      background: #fff;
       padding: 20px;
-      background: #fff5e6;
       border-radius: 12px;
-      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    .card h3 {
+      margin-bottom: 12px;
+      color: #2c3e50;
+    }
+    .rank-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #2575fc;
+      margin: 12px 0;
     }
 
-    .weekly-challenge button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      background: #28a745;
-      color: white;
+    .btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 18px;
       border: none;
       border-radius: 6px;
+      font-weight: 500;
       cursor: pointer;
-      font-weight: 600;
+      transition: 0.3s;
+    }
+    .btn-primary {
+      background: #2575fc;
+      color: #fff;
+    }
+    .btn-primary:hover { background: #1257c0; }
+
+    .btn-outline {
+      border: 1px solid #2575fc;
+      color: #2575fc;
+      background: transparent;
+    }
+    .btn-outline:hover { background: #f0f4ff; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
-
 <body>
-  <!-- Navbar -->
-  <nav>
-    <div class="logo">ECOLEARN</div>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="logo">EcoLearn</div>
     <ul>
-      <li><a href="home">Home</a></li>
-      <li><a href="lessons">Lessons</a></li>
-      <li><a href="quizzes">Quizzes</a></li>
-      <li><a href="ecotasks">Eco Tasks</a></li>
-      <li><a href="progress">Progress</a></li>
-      <li><a href="leaderboards">Leaderboard</a></li>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Lessons</a></li>
+      <li><a href="#">Quizzes</a></li>
+      <li><a href="#">Eco Tasks</a></li>
+      <li><a href="#">Progress</a></li>
+      <li><a href="#" class="active">Leaderboard</a></li>
     </ul>
-    <div class="auth-buttons">
-      <button class="login">Login</button>
-      <button class="signup">Sign Up</button>
-    </div>
-  </nav>
+  </div>
 
+  <!-- MAIN CONTENT -->
   <div class="container">
-    <!-- Profile Header -->
-    <div class="profile-header">
-      <div class="profile-info">
-        <h2>Eco Warrior</h2>
-        <p>Level 5 • Joined January 2024</p>
-      </div>
-      <div class="eco-points">
-        <h1>1250</h1>
-        <p>Total Eco Points</p>
-        <div class="progress-bar"><span style="width:100%"></span></div>
-      </div>
+
+    <!-- LEFT: Leaderboard -->
+    <div class="leaderboard">
+      <h2>Leaderboard</h2>
+      <ul>
+        <li class="gold"><span>🥇 Alex Chen</span><span>2450 pts</span></li>
+        <li class="silver"><span>🥈 Maya Patel</span><span>2380 pts</span></li>
+        <li class="bronze"><span>🥉 Jordan Kim</span><span>2250 pts</span></li>
+        <li><span>Sam Wilson</span><span>2100 pts</span></li>
+        <li><span>Riley Taylor</span><span>1950 pts</span></li>
+        <li class="you"><span>⭐ You</span><span>1250 pts</span></li>
+      </ul>
     </div>
 
-    <!-- Stats -->
-    <div class="stats">
-      <div class="stat-card">
-        <p>Tasks Done</p>
-        <h2>8</h2>
-      </div>
-      <div class="stat-card">
-        <p>Lessons</p>
-        <h2>15</h2>
-      </div>
-      <div class="stat-card">
-        <p>Quizzes</p>
-        <h2>6</h2>
-      </div>
-      <div class="stat-card">
-        <p>Day Streak</p>
-        <h2>12 🔥</h2>
-      </div>
-    </div>
+    <!-- RIGHT: Sidebar -->
+    <div class="sidebar">
 
-    <!-- Learning Progress -->
-    <div class="section">
-      <h3>Learning Progress</h3>
-      <div class="progress-item">
-        <span><b>Ecosystem Well-being</b> 8/12 lessons</span>
-        <div class="progress-bar"><span style="width:70%"></span></div>
+      <!-- Your Rank -->
+      <div class="card">
+        <h3>Your Current Rank</h3>
+        <p class="rank-number">#6</p>
+        <p>Out of 1,247 participants</p>
+        <button class="btn btn-primary">View Progress</button>
       </div>
-      <div class="progress-item">
-        <span><b>Sustainable Living</b> 5/8 lessons</span>
-        <div class="progress-bar"><span style="width:60%"></span></div>
-      </div>
-      <div class="progress-item">
-        <span><b>Climate Responsibility</b> 2/6 lessons</span>
-        <div class="progress-bar"><span style="width:30%"></span></div>
-      </div>
-    </div>
 
-    <!-- Activity & Badges -->
-    <div class="activity">
-      <div class="recent-activity section">
-        <h3>Recent Activity</h3>
-        <ul>
-          <li>Marine Life Protection <span>+25 pts</span></li>
-          <li>Community Cleanup <span>+150 pts</span></li>
-          <li>Biodiversity Basics <span>+40 pts</span></li>
-          <li>Sustainable Transportation <span>+30 pts</span></li>
-        </ul>
+      <!-- Weekly Challenge -->
+      <div class="card">
+        <h3>Weekly Challenge</h3>
+        <p><strong>Plastic-Free Week</strong><br>Reduce plastic usage in daily life</p>
+        <p>Participants: 1,247<br>Time Left: 3 days</p>
+        <button class="btn btn-primary">Join Challenge</button>
       </div>
-      <div class="badges">
-        <h3>Badges & Achievements</h3>
-        <div class="badge-grid">
-          <div class="badge">🌱 First Steps</div>
-          <div class="badge">📖 Knowledge Seeker</div>
-          <div class="badge">🎯 Quiz Master</div>
-          <div class="badge">🤝 Community Hero</div>
-          <div class="badge">🔥 Consistency Champion</div>
-          <div class="badge">💧 Water Guardian</div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Weekly Challenge -->
-    <div class="weekly-challenge">
-      <h3>Weekly Challenge</h3>
-      <p><b>Plastic-Free Week</b><br>Avoid single-use plastics for 7 days</p>
-      <div class="progress-bar"><span style="width:45%"></span></div>
-      <button>Log Today’s Progress</button>
+      <!-- Achievement -->
+      <div class="card">
+        <h3>Achievement Spotlight 🌟</h3>
+        <p><strong>Community Impact Champion</strong><br>
+        Awarded to Maya Patel for organizing 5 cleanup events.</p>
+        <button class="btn btn-outline">View Achievements</button>
+      </div>
+
     </div>
   </div>
-</body>
 
+</body>
 </html>
